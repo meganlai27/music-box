@@ -1,0 +1,9 @@
+- sign in through spotify
+- keep key in database? use as user review
+- callback to homepage
+- pull from the data base (hard code for now)
+- search bar performs a search  
+    - use search function to return albums
+    - pass values to search page, display results in card format
+
+    - be able to navigate to review form from each
