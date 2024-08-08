@@ -1,8 +1,11 @@
-import {Container, InputGroup, FormControl, Button, Row, Cards, Card } from 'react-bootstrap';
+import {InputGroup, FormControl, Button, Row, Card } from 'react-bootstrap';
 import { useState } from 'react';
 import fetchSearchResults from '../script';
+import '../style/search.css'
+import NavBar from '../components/navbar'
 
-interface Album {
+// Album object returned by Spotify API
+export interface Album {
         album_type: string,
         total_tracks: number,
         available_markets: [string],
@@ -55,11 +58,7 @@ const Search = () => {
                 </>
             )
         } else {
-        //     const accessToken = await getAccessToken(code);
-        // const result = await fetch('https://api.spotify.com/v1/search?q=' + searchInput + '&type=artist', {
-        //     method: "GET", headers: { Authorization: `Bearer ${accessToken}` }
-        // })
-        const result = await fetchSearchResults(searchInput)
+          const result = await fetchSearchResults(searchInput)
 
             console.log(result)
 
@@ -71,50 +70,53 @@ const Search = () => {
 
 
     return (
-        <>
-            <div>
+      <>
+        <div className = "page">
+          <NavBar/>
+          <div className = "search-bar">
+            <InputGroup size = 'lg'>
+              <FormControl className = "search-input"
+                size = 'lg'
+                placeholder = 'Search For Artist'
+                type = "input"
+                onKeyPress={event => {
+                  if (event.key == 'Enter'){
+                    search();
+                  }
+                }}
+                onChange = {event => setSearchInput(event.target.value) }
+              />
+              <Button onClick={search}>
+                Search
+              </Button>
+            </InputGroup>
+          </div>
+          <div className = "">
+            <Row>
+              {albums.map( (album: Album) => {
+                console.log(album);
+                return(
+                  <Card className = 'text-white bg-info'>
+                    <Card.Img className = "card-image" src={album.images[0].url}/>
+                    <Card.Body >
+                      <Card.Title>{album.name}</Card.Title>
+                      {/* <Button onClick = {event => {console.log('Add form here')}}>
+                        Rate Me
+                      </Button> */}
+                      {/* <Button onClick={event => {routeReviewForm(album)}}>Rate</Button> */}
+                      <Button>View</Button>
+                      <Button>Rate</Button>
+                    </Card.Body>
+                  </Card>
+                )
+              })}
+            </Row>
+          </div>
 
-<Container>
-  <InputGroup className = "mb-3" size = "lg">
-    <FormControl 
-      placeholder = 'Search For Artist'
-      type = "input"
-      onKeyPress={event => {
-        if (event.key == 'Enter'){
-          search();
-        }
-      }}
-      onChange = {event => setSearchInput(event.target.value) }
-    />
-    <Button onClick={search}>
-      Search
-    </Button>
-  </InputGroup>
-</Container>
-<Container>
-  <Row className='no-gutters row row-cols-4'>
-    {albums.map( (album: Album, i) => {
-      console.log(album);
-      return(
-        <Card className = 'text-white bg-info'>
-          <Card.Img src={album.images[0].url} />
-          <Card.Body>
-            <Card.Title>{album.name}</Card.Title>
-            {/* <Button onClick = {console.log('Add form here')}>
-              Rate Me
-            </Button> */}
-            {/* <Button onClick={event => {routeReviewForm(album)}}>Rate</Button> */}
-          </Card.Body>
-        </Card>
-      )
-    })}
-  </Row>
-</Container>
 
-
-</div>
-        </>
-  )
+        </div>
+      </>
+    )
 }
 
 export default Search;

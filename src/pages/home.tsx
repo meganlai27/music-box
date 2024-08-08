@@ -1,16 +1,17 @@
 import '../style/home.css'
 import Search from './search'
-import {Container, InputGroup, FormControl, Button, Row, Cards, Card } from 'react-bootstrap';
-import { useState, useEffect, useNavigate } from "react";
+import {InputGroup, FormControl, Button } from 'react-bootstrap';
+import { useState } from "react";
 import fetchSearchResults from '../script'
 
-
+// Home page displaying content
+// This is currently hardcoded, but will display most popular albums once there are reviews
 const Home = () => {
     console.log("At Home page")
 
     // const navigate = useNavigate();
     const[searchInput, setSearchInput] = useState("");
-    const[albums, setAlbums] = useState([]);
+    // const[albums, setAlbums] = useState([]);
 
     const params = new URLSearchParams(window.location.search);
 
@@ -23,10 +24,6 @@ const Home = () => {
                 </>
             )
         } else {
-        //     const accessToken = await getAccessToken(code);
-        // const result = await fetch('https://api.spotify.com/v1/search?q=' + searchInput + '&type=artist', {
-        //     method: "GET", headers: { Authorization: `Bearer ${accessToken}` }
-        // })
         const result = await fetchSearchResults(searchInput)
 
             console.log(result)
@@ -36,45 +33,45 @@ const Home = () => {
     return (
         <>
         <div>
-            <div> 
-      <h1>MusicBox</h1>
-      <nav>
-            <div id="nav-left">
-                <img
-                    alt="Star Logo"
-            src="https://static.vecteezy.com/system/resources/thumbnails/001/189/165/small/star.png"
+            <div className = "page"> 
+                <h1>MusicBox</h1>
+                    <nav>
+                        <div id="nav-left">
+                                <img
+                                    alt="Star Logo"
+                            src="https://static.vecteezy.com/system/resources/thumbnails/001/189/165/small/star.png"
 
-                width="80px"/>
-                <ul id="menu-list">
-                    <li>New Review</li>
-                    <a id="userProfile.html" href="sign-in">Profile</a>
-                    <a id="login.html" href="sign-in">Log In</a>
-                    </ul>
-            </div>
+                                width="80px"/>
+                                <ul id="menu-list">
+                                    <li>New Review</li>
+                                    <a id="userProfile.html" href="sign-in">Profile</a>
+                                    <a id="login.html" href="sign-in">Log In</a>
+                                    </ul>
+                        </div>
 
 
-            <div id="nav-right">
-                <input placeholder="Search for a song..."/>
-    <InputGroup className = "mb-3" size = "lg">
-      <FormControl 
-        placeholder = 'Search For Artist'
-        type = "input"
-        onKeyPress={event => {
-          if (event.key == 'Enter'){
-            search()
-          }
-        }}
-        onChange = {event => setSearchInput(event.target.value) }
-      />
-      {/* <Button onClick={search}> */}
-      <Button>
-        Search
-      </Button>
-    </InputGroup>
-    </div>
+                        <div id="nav-right">
+                            <input placeholder="Search for a song..."/>
+                            <InputGroup className = "mb-3" size = "lg">
+                            <FormControl 
+                                placeholder = 'Search For Artist'
+                                type = "input"
+                                onKeyPress={event => {
+                                if (event.key == 'Enter'){
+                                    search()
+                                }
+                                }}
+                                onChange = {event => setSearchInput(event.target.value) }
+                            />
+                        {/* <Button onClick={search}> */}
+                            <Button>
+                                Search
+                            </Button>
+                            </InputGroup>
+                        </div>
+                    </nav>
 
-        </nav>
-        <section id="banner">Global Reviews</section>
+                    <section id="banner">Global Reviews</section>
 
         <header>
             <section id="movie-cards">

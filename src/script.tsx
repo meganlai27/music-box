@@ -7,7 +7,7 @@ const code = params.get("code");
 
 let accessToken : string = "";
 
-// Sign in with Spotify Account
+// Check if there is a code in the query string, else redirect to authorization
 if (!code) {
     redirectToAuthCodeFlow(clientId);
 } else {
@@ -53,7 +53,6 @@ async function generateCodeChallenge(codeVerifier: string) {
 }
 
 // export async function getAccessToken(clientId: string, code: string): Promise<string> {
-// export async function getAccessToken(code: string): Promise<string> {
   export async function getAccessToken(code: string): Promise<string> {
     const verifier = localStorage.getItem("verifier");
 
@@ -75,29 +74,30 @@ async function generateCodeChallenge(codeVerifier: string) {
 }
 
 // Fetch albums from search results with given search input
+// This will be called in Search page.
 async function fetchSearchResults(searchInput: string): Promise<any> {
 
-  // Fetch the first Artist ID
-  const artistID = await fetch('https://api.spotify.com/v1/search?q=' + searchInput + '&type=artist', {
-      method: "GET", headers: { Authorization: `Bearer ${accessToken}` }
-  })
-  .then(response => response.json())
-  .then(data => {console.log(data)
-  return data.artists.items[0].id})
+    // Fetch the first Artist ID
+    const artistID = await fetch('https://api.spotify.com/v1/search?q=' + searchInput + '&type=artist', {
+        method: "GET", headers: { Authorization: `Bearer ${accessToken}` }
+    })
+    .then(response => response.json())
+    .then(data => {console.log(data)
+    return data.artists.items[0].id});
 
-  // Fetch the albums of the artist found
-  const returnedAlbums = await fetch('https://api.spotify.com/v1/artists/'+artistID+'/albums' + '?include_groups=album&market=US&limit=50', {
-    method: "GET", headers: { Authorization: `Bearer ${accessToken}` }
-})
-      .then(response => response.json())
-      .then(data => {
+    // Fetch the albums of the artist found
+    const returnedAlbums = await fetch('https://api.spotify.com/v1/artists/'+artistID+'/albums' + '?include_groups=album&market=US&limit=50', {
+            method: "GET", headers: { Authorization: `Bearer ${accessToken}` }
+    })
+    .then(response => response.json())
+    .then(data => {
         console.log(data)
         return data.items
-      })
+    })
 
 
-      return returnedAlbums
+    return returnedAlbums;
 
-  }
+}
 
 export default fetchSearchResults;

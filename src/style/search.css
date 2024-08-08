@@ -91,13 +91,15 @@ header {
 .card {
     width: min-content;
 }
+
+
 #movie-cards {
-    width: 100vw;
     background-color: rgb(241, 242, 243);
     display: flex;
     justify-content: space-around;
     padding: 30px;
 }
+
 
 /*Review Form buttons*/
 .container {
@@ -119,6 +121,28 @@ header {
 .center{
     width: 135px;
     margin: auto;
+}
+
+.search-bar {
+    /* position: relative; */
+    padding-top: 20px;
+    align-content: center;
+
+}
+
+.search-input {
+    width: 70vw;
+    height: 30px;
+}
+
+.page {
+    height: 100vw;
+    width: 100vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 #rating-value{
@@ -169,8 +193,4 @@ header {
 .rating > label:hover ~ input:checked ~ label,
 .rating > input:checked ~ label:hover ~ label{
     color: #2ddc76;
-}
-
-.page {
-    width: 100vw;
 }
