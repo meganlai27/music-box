@@ -4,7 +4,7 @@ Music Box is a web app used to rate music albums.
 
 This App was made as a group of 5: Conlan Foulkes, Cee Latkar, Sam, Liu von Engelbrechten, and Megan Lai. Conlan worked on integrating the Spotify API, Cee worked on design, Megan worked on integrating the review database, Sam and Lu helped with tasks along the way, and all of us worked on frontend tasks to complete and demo the website. 
 
-It was made in a different repository but is temporarily being reconfigured to work with the Spotify API. This was also done to help my own understanding of how the API works. This was integrated using the Spotify for Developers Documentation and example Web App: https://developer.spotify.com/documentation/web-api/howtos/web-app-profile.
+It was made in a different repository (https://github.com/Oasis-NEU/f23-group24) but is temporarily being reconfigured to work with the Spotify API. This was also done to help my own understanding of how the API works. This was integrated using the Spotify for Developers Documentation and example Web App: https://developer.spotify.com/documentation/web-api/howtos/web-app-profile.
 
 # Project Status
 This project is currently in development. Users can search music albums using the integrated Spotify API. Components to rate albums are made but need to be integrated with the app.
